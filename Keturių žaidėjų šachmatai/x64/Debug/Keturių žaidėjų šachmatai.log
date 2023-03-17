@@ -1,0 +1,6 @@
+﻿  main.cpp
+C:\Users\MSI\Desktop\Keturių žaidėjų šachmatai\main.cpp(37,38): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\MSI\Desktop\Keturių žaidėjų šachmatai\main.cpp(43,38): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\MSI\Desktop\Keturių žaidėjų šachmatai\main.cpp(53,38): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\MSI\Desktop\Keturių žaidėjų šachmatai\main.cpp(59,38): warning C4553: '==': result of expression not used; did you intend '='?
+  Keturių žaidėjų šachmatai.vcxproj -> C:\Users\MSI\Desktop\Keturių žaidėjų šachmatai\x64\Debug\Keturių žaidėjų šachmatai.exe
