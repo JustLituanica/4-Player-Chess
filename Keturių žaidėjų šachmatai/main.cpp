@@ -33,7 +33,7 @@
 
 using namespace sf;
 
-int  size = 74;
+int  size = 65;
 int board[14][14] =
 { 
    55, 55, 55,    4, 6, 8, 12, 10, 8, 6, 4,   55, 55, 55, 
@@ -57,7 +57,7 @@ int board[14][14] =
 
 int main()
 {
-    RenderWindow window(VideoMode(700, 700), "4 player chess");
+    RenderWindow window(VideoMode(910, 910), "4 player chess");
 
     bool isFullscreen = true;
     int lenght = 14;
@@ -149,6 +149,7 @@ int main()
 
                 if (board[i][j] != 0)
                 {
+                    //====== Pestiinkai lentoje =====================
                     if (board[i][j] == PawnRed)
                     {
                         RedPawn.setPosition(j * size, i * size);
@@ -172,6 +173,141 @@ int main()
                         GreenPawn.setPosition(j * size, i * size);
                         window.draw(GreenPawn);
                     }
+                    //===============================================
+
+                    //========= Arkliai lentoje =====================
+                    if (board[i][j] == KnightRed)
+                    {
+                        RedKnight.setPosition(j * size, i * size);
+                        window.draw(RedKnight);
+                    }
+
+                    if (board[i][j] == KnightBlue)
+                    {
+                        BlueKnight.setPosition(j * size, i * size);
+                        window.draw(BlueKnight);
+                    }
+
+                    if (board[i][j] == KnightYellow)
+                    {
+                        YellowKnight.setPosition(j * size, i * size);
+                        window.draw(YellowKnight);
+                    }
+
+                    if (board[i][j] == KnightGreen)
+                    {
+                        GreenKnight.setPosition(j * size, i * size);
+                        window.draw(GreenKnight);
+                    }
+                    //===============================================
+
+                    //========== Rikiai lentoje =====================
+                    if (board[i][j] == BishopRed)
+                    {
+                        RedBishop.setPosition(j * size, i * size);
+                        window.draw(RedBishop);
+                    }
+
+                    if (board[i][j] == BishopBlue)
+                    {
+                        BlueBishop.setPosition(j * size, i * size);
+                        window.draw(BlueBishop);
+                    }
+
+                    if (board[i][j] == BishopYellow)
+                    {
+                        YellowBishop.setPosition(j * size, i * size);
+                        window.draw(YellowBishop);
+                    }
+
+                    if (board[i][j] == BishopGreen)
+                    {
+                        GreenBishop.setPosition(j * size, i * size);
+                        window.draw(GreenBishop);
+                    }
+
+                    //===============================================
+
+                    //========== Bokstai lentoje ====================
+                    if (board[i][j] == RookRed)
+                    {
+                        RedRook.setPosition(j * size, i * size);
+                        window.draw(RedRook);
+                    }
+
+                    if (board[i][j] == RookBlue)
+                    {
+                        BlueRook.setPosition(j * size, i * size);
+                        window.draw(BlueRook);
+                    }
+
+                    if (board[i][j] == RookYellow)
+                    {
+                        YellowRook.setPosition(j * size, i * size);
+                        window.draw(YellowRook);
+                    }
+
+                    if (board[i][j] == RookGreen)
+                    {
+                        GreenRook.setPosition(j * size, i * size);
+                        window.draw(GreenRook);
+                    }
+
+                    //===============================================
+
+                    //========= Karalienes lentoje ==================
+                    if (board[i][j] == QueenRed)
+                    {
+                        RedQueen.setPosition(j * size, i * size);
+                        window.draw(RedQueen);
+                    }
+
+                    if (board[i][j] == QueenBlue)
+                    {
+                        BlueQueen.setPosition(j * size, i * size);
+                        window.draw(BlueQueen);
+                    }
+
+                    if (board[i][j] == QueenYellow)
+                    {
+                        YellowQueen.setPosition(j * size, i * size);
+                        window.draw(YellowQueen);
+                    }
+
+                    if (board[i][j] == QueenGreen)
+                    {
+                        GreenQueen.setPosition(j * size, i * size);
+                        window.draw(GreenQueen);
+                    }
+
+                    //===============================================
+
+                    //========== Karaliai lentoje ===================
+                    if (board[i][j] == KingRed)
+                    {
+                        RedKing.setPosition(j * size, i * size);
+                        window.draw(RedKing);
+                    }
+
+                    if (board[i][j] == KingBlue)
+                    {
+                        BlueKing.setPosition(j * size, i * size);
+                        window.draw(BlueKing);
+                    }
+
+                    if (board[i][j] == KingYellow)
+                    {
+                        YellowKing.setPosition(j * size, i * size);
+                        window.draw(YellowKing);
+                    }
+
+                    if (board[i][j] == KingGreen)
+                    {
+                        GreenKing.setPosition(j * size, i * size);
+                        window.draw(GreenKing);
+                    }
+
+                    //===============================================
                 }
             }
         }
