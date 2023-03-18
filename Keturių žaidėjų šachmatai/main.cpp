@@ -33,7 +33,12 @@
 
 using namespace sf;
 
-int  size = 65;
+struct poz
+{
+    int x, y;
+};
+
+int  size = 65, x = 0, y = 0;
 int board[14][14] =
 { 
    55, 55, 55,    4, 6, 8, 12, 10, 8, 6, 4,   55, 55, 55, 
@@ -55,6 +60,8 @@ int board[14][14] =
 
 };
 
+int Move = 0; // 0 raudoni, 1 melyni, 2 geltoni, 3 zali
+
 int main()
 {
     RenderWindow window(VideoMode(910, 910), "4 player chess");
@@ -62,75 +69,88 @@ int main()
     bool isFullscreen = true;
     int lenght = 14;
 
-    Texture t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, t25;
+    Texture brd; //lentos textura (board)
+    Texture p1, p2, p3, p4; //pestininko textura (pawn)
+    Texture k1, k2, k3, k4; //arklio textura (knight)
+    Texture b1, b2, b3, b4; //rikio textura (bishop)
+    Texture r1, r2, r3, r4; //boksto textura (rook)
+    Texture q1, q2, q3, q4; //karalienes textura (queen)
+    Texture king1, king2, king3, king4; //karaliaus textura
 
-    t1.loadFromFile("images/Board.png");
+    brd.loadFromFile("images/Board.png");
 
-    t2.loadFromFile("images/Pawns/PawnRed.png");
-    t3.loadFromFile("images/Pawns/PawnBlue.png");
-    t4.loadFromFile("images/Pawns/PawnYellow.png");
-    t5.loadFromFile("images/Pawns/PawnGreen.png");
+    p1.loadFromFile("images/Pawns/PawnRed.png");
+    p2.loadFromFile("images/Pawns/PawnBlue.png");
+    p3.loadFromFile("images/Pawns/PawnYellow.png");
+    p4.loadFromFile("images/Pawns/PawnGreen.png");
 
-    t6.loadFromFile("images/Knights/KnightRed.png");
-    t7.loadFromFile("images/Knights/KnightBlue.png");
-    t8.loadFromFile("images/Knights/KnightYellow.png");
-    t9.loadFromFile("images/Knights/KnightGreen.png");
+    k1.loadFromFile("images/Knights/KnightRed.png");
+    k2.loadFromFile("images/Knights/KnightBlue.png");
+    k3.loadFromFile("images/Knights/KnightYellow.png");
+    k4.loadFromFile("images/Knights/KnightGreen.png");
 
-    t10.loadFromFile("images/Bishops/BishopRed.png");
-    t11.loadFromFile("images/Bishops/BishopBlue.png");
-    t12.loadFromFile("images/Bishops/BishopYellow.png");
-    t13.loadFromFile("images/Bishops/BishopGreen.png");
+    b1.loadFromFile("images/Bishops/BishopRed.png");
+    b2.loadFromFile("images/Bishops/BishopBlue.png");
+    b3.loadFromFile("images/Bishops/BishopYellow.png");
+    b4.loadFromFile("images/Bishops/BishopGreen.png");
 
-    t14.loadFromFile("images/Rooks/RookRed.png");
-    t15.loadFromFile("images/Rooks/RookBlue.png");
-    t16.loadFromFile("images/Rooks/RookYellow.png");
-    t17.loadFromFile("images/Rooks/RookGreen.png");
+    r1.loadFromFile("images/Rooks/RookRed.png");
+    r2.loadFromFile("images/Rooks/RookBlue.png");
+    r3.loadFromFile("images/Rooks/RookYellow.png");
+    r4.loadFromFile("images/Rooks/RookGreen.png");
 
-    t18.loadFromFile("images/Queens/QueenRed.png");
-    t19.loadFromFile("images/Queens/QueenBlue.png");
-    t20.loadFromFile("images/Queens/QueenYellow.png");
-    t21.loadFromFile("images/Queens/QueenGreen.png");
+    q1.loadFromFile("images/Queens/QueenRed.png");
+    q2.loadFromFile("images/Queens/QueenBlue.png");
+    q3.loadFromFile("images/Queens/QueenYellow.png");
+    q4.loadFromFile("images/Queens/QueenGreen.png");
 
-    t22.loadFromFile("images/Kings/KingRed.png");
-    t23.loadFromFile("images/Kings/KingBlue.png");
-    t24.loadFromFile("images/Kings/KingYellow.png");
-    t25.loadFromFile("images/Kings/KingGreen.png");
+    king1.loadFromFile("images/Kings/KingRed.png");
+    king2.loadFromFile("images/Kings/KingBlue.png");
+    king3.loadFromFile("images/Kings/KingYellow.png");
+    king4.loadFromFile("images/Kings/KingGreen.png");
 
-    Sprite Board(t1);
+    Sprite Board(brd);
 
-    Sprite RedPawn(t2);
-    Sprite BluePawn(t3);
-    Sprite YellowPawn(t4);
-    Sprite GreenPawn(t5);
+    Sprite RedPawn(p1);
+    Sprite BluePawn(p2);
+    Sprite YellowPawn(p3);
+    Sprite GreenPawn(p4);
 
-    Sprite RedKnight(t6);
-    Sprite BlueKnight(t7);
-    Sprite YellowKnight(t8);
-    Sprite GreenKnight(t9);
+    Sprite RedKnight(k1);
+    Sprite BlueKnight(k2);
+    Sprite YellowKnight(k3);
+    Sprite GreenKnight(k4);
 
-    Sprite RedBishop(t10);
-    Sprite BlueBishop(t11);
-    Sprite YellowBishop(t12);
-    Sprite GreenBishop(t13);
+    Sprite RedBishop(b1);
+    Sprite BlueBishop(b2);
+    Sprite YellowBishop(b3);
+    Sprite GreenBishop(b4);
 
-    Sprite RedRook(t14);
-    Sprite BlueRook(t15);
-    Sprite YellowRook(t16);
-    Sprite GreenRook(t17);
+    Sprite RedRook(r1);
+    Sprite BlueRook(r2);
+    Sprite YellowRook(r3);
+    Sprite GreenRook(r4);
 
-    Sprite RedQueen(t18);
-    Sprite BlueQueen(t19);
-    Sprite YellowQueen(t20);
-    Sprite GreenQueen(t21);
+    Sprite RedQueen(q1);
+    Sprite BlueQueen(q2);
+    Sprite YellowQueen(q3);
+    Sprite GreenQueen(q4);
 
-    Sprite RedKing(t22);
-    Sprite BlueKing(t23);
-    Sprite YellowKing(t24);
-    Sprite GreenKing(t25);
+    Sprite RedKing(king1);
+    Sprite BlueKing(king2);
+    Sprite YellowKing(king3);
+    Sprite GreenKing(king4);
 
-    sf::Event event;
+    float dx = 0, dy = 0;
+    int PieceMoved = 0;
 
     while (window.isOpen()) {
+
+        Vector2i pos = Mouse::getPosition(window);
+        x = pos.x / size;
+        y = pos.y / size;
+
+        Event event;
 
         while (window.pollEvent(event)) {
 
@@ -139,6 +159,25 @@ int main()
                 window.close();
             }
         }
+        window.clear();
+
+        if (event.type == Event::MouseButtonPressed)
+        {
+            std::cout << "x=" << x << " y=" << y << "\n";
+            std::cout << "pos_x=" << pos.x << " pos_y=" << pos.y << "\n";
+            std::cout << "board[y][x]=" << board[y][x] << "\n";
+            std::cout << "\n";
+        }
+
+        if (event.type == Event::MouseButtonReleased)
+        {
+            if (event.key.code == Mouse::Left)
+            {
+
+            }
+        }
+
+        //=========== Vaizdas ============
         window.clear();
         window.draw(Board);
 
